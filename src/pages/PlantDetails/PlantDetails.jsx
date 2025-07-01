@@ -41,6 +41,7 @@ const PlantDetails = () => {
           text-lg font-light text-neutral-500'
           >
            {description}
+           
           </div>
           <hr className='my-6' />
 
