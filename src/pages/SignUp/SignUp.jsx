@@ -1,9 +1,9 @@
 import { Link, useNavigate } from 'react-router'
 import { FcGoogle } from 'react-icons/fc'
-import useAuth from '../../hooks/useAuth'
 import { toast } from 'react-hot-toast'
 import { TbFidgetSpinner } from 'react-icons/tb'
 import { uploadImage } from '../../Api/Utils'
+import useAuth from '../../hooks/useAuth'
 
 const SignUp = () => {
   const { createUser, updateUserProfile, signInWithGoogle, loading } = useAuth()

@@ -4,10 +4,13 @@ import Button from '../../components/Shared/Button/Button'
 import PurchaseModal from '../../components/Modal/PurchaseModal'
 import { useState } from 'react'
 import { useLoaderData } from 'react-router'
+import useAuth from '../../hooks/useAuth'
 
 const PlantDetails = () => {
   let [isOpen, setIsOpen] = useState(false)
   const plant = useLoaderData()
+  // console.log(plant);
+  const {user} = useAuth()
   const {photo, title, category, description, price, seller, quantity} = plant
 
   const closeModal = () => {
@@ -41,7 +44,7 @@ const PlantDetails = () => {
           text-lg font-light text-neutral-500'
           >
            {description}
-           
+
           </div>
           <hr className='my-6' />
 
@@ -55,7 +58,7 @@ const PlantDetails = () => {
                 gap-2
               '
           >
-            <div>{seller.name}</div>
+            <div>{seller?.name}</div>
 
             <img
               className='rounded-full'
@@ -63,7 +66,7 @@ const PlantDetails = () => {
               width='30'
               alt='Avatar'
               referrerPolicy='no-referrer'
-              src={seller.image}
+              src={seller?.image}
             />
           </div>
           <hr className='my-6' />
@@ -81,13 +84,18 @@ const PlantDetails = () => {
           <hr className='my-6' />
           <div className='flex justify-between'>
             <p className='font-bold text-3xl text-gray-500'>Price: {price}$</p>
+
             <div>
-              <Button onClick={() => setIsOpen(true)} label='Purchase' />
+              <Button 
+              disabled={!user}
+              onClick={() => setIsOpen(true)} 
+              label={user ? 'parches' : 'login to parches'} />
             </div>
           </div>
           <hr className='my-6' />
 
-          <PurchaseModal closeModal={closeModal} isOpen={isOpen} />
+
+          <PurchaseModal closeModal={closeModal} isOpen={isOpen} plant={plant} />
         </div>
       </div>
     </Container>

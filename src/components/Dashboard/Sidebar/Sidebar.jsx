@@ -5,13 +5,12 @@ import { AiOutlineBars } from 'react-icons/ai'
 import { BsGraphUp } from 'react-icons/bs'
 import MenuItem from './Menu/MenuItem'
 
-import useAuth from '../../../hooks/useAuth'
-
 import AdminMenu from './Menu/AdminMenu'
 import { Link } from 'react-router'
 import SellerMenu from './Menu/SellerMenu'
 import CustomerMenu from './Menu/CustomerMenu'
 import logo from '../../../assets/images/logo-flat.png'
+import useAuth from '../../../hooks/useAuth'
 const Sidebar = () => {
   const { logOut } = useAuth()
   const [isActive, setActive] = useState(false)

@@ -1,9 +1,9 @@
 import { Link, Navigate, useLocation, useNavigate } from 'react-router'
 import { FcGoogle } from 'react-icons/fc'
-import useAuth from '../../hooks/useAuth'
 import toast from 'react-hot-toast'
 import { TbFidgetSpinner } from 'react-icons/tb'
 import LoadingSpinner from '../../components/Shared/LoadingSpinner'
+import useAuth from '../../hooks/useAuth'
 
 const Login = () => {
   const { signIn, signInWithGoogle, loading, user } = useAuth()

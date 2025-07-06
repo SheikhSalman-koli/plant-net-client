@@ -2,9 +2,10 @@ import Container from '../Container'
 import { AiOutlineMenu } from 'react-icons/ai'
 import { useState } from 'react'
 import { Link } from 'react-router'
-import useAuth from '../../../hooks/useAuth'
+
 import avatarImg from '../../../assets/images/placeholder.jpg'
 import logo from '../../../assets/images/logo-flat.png'
+import useAuth from '../../../hooks/useAuth'
 const Navbar = () => {
   const { user, logOut } = useAuth()
   const [isOpen, setIsOpen] = useState(false)

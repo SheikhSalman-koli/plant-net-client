@@ -66,7 +66,7 @@ const AuthProvider = ({ children }) => {
           
         })
           .then(res => {
-            console.log('token after jwt', res.data);
+            // console.log('token after jwt', res.data);
           })
           .catch(error => console.log(error))
       }
