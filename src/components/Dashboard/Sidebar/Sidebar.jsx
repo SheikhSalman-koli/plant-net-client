@@ -11,14 +11,21 @@ import SellerMenu from './Menu/SellerMenu'
 import CustomerMenu from './Menu/CustomerMenu'
 import logo from '../../../assets/images/logo-flat.png'
 import useAuth from '../../../hooks/useAuth'
+import useRole from '../../../hooks/useRole'
+import LoadingSpinner from '../../Shared/LoadingSpinner'
 const Sidebar = () => {
   const { logOut } = useAuth()
   const [isActive, setActive] = useState(false)
-
+  const [role, isRoleLoading] = useRole()
+  // console.log(role);
+ 
   // Sidebar Responsive Handler
   const handleToggle = () => {
     setActive(!isActive)
   }
+
+  if(isRoleLoading) return <LoadingSpinner></LoadingSpinner>
+
   return (
     <>
       {/* Small Screen Navbar */}
@@ -70,27 +77,29 @@ const Sidebar = () => {
           <div className='flex flex-col justify-between flex-1 mt-6'>
             <nav>
               {/*  Menu Items */}
-              <CustomerMenu />
-              <SellerMenu />
+              {!isRoleLoading && role === 'customer' && <CustomerMenu />}
+              {!isRoleLoading && role === 'seller' && <SellerMenu />}
 
               <MenuItem
                 icon={BsGraphUp}
                 label='Statistics'
                 address='/dashboard'
               />
-              <AdminMenu />
+
+              {!isRoleLoading && role === 'admin' && <AdminMenu />}
             </nav>
           </div>
         </div>
 
         <div>
           <hr />
-
-          <MenuItem
+ 
+           <MenuItem
             icon={FcSettings}
             label='Profile'
             address='/dashboard/profile'
-          />
+            />
+          
           <button
             onClick={logOut}
             className='flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform'

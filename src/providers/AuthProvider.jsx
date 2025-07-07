@@ -59,7 +59,7 @@ const AuthProvider = ({ children }) => {
 
       // Get JWT token
       if (currentUser?.email) {
-        const userData = { email: currentUser.email }
+        const userData = { email: currentUser?.email }
 
         axios.post(`${import.meta.env.VITE_API_URL}/jwt`, userData,{
           withCredentials: true

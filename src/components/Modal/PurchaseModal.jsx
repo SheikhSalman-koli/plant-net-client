@@ -8,7 +8,7 @@ import PaymentForm from '../Form/PaymentForm'
 
 const stripePromise = loadStripe(import.meta.env.VITE_PABLISHABLE_KEY);
 
-const PurchaseModal = ({ closeModal, isOpen, plant }) => {
+const PurchaseModal = ({ closeModal, isOpen, plant , refetch}) => {
 
   const { photo, name, category, price, _id, seller, quantity } = plant
   const { user } = useAuth()
@@ -120,6 +120,7 @@ const PurchaseModal = ({ closeModal, isOpen, plant }) => {
                 totalPrice={totalPrice}
                 closeModal={closeModal}
                 orderData={orderData}
+                refetch={refetch}
               ></PaymentForm>
             </Elements>
 

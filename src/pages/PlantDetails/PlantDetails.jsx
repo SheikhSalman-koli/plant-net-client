@@ -3,20 +3,40 @@ import Heading from '../../components/Shared/Heading'
 import Button from '../../components/Shared/Button/Button'
 import PurchaseModal from '../../components/Modal/PurchaseModal'
 import { useState } from 'react'
-import { useLoaderData } from 'react-router'
+import { useParams } from 'react-router'
 import useAuth from '../../hooks/useAuth'
+import useRole from '../../hooks/useRole'
+import LoadingSpinner from '../../components/Shared/LoadingSpinner'
+import { useQuery } from '@tanstack/react-query'
+import useAxiosSecure from '../../hooks/useAxiosSecure'
 
 const PlantDetails = () => {
   let [isOpen, setIsOpen] = useState(false)
-  const plant = useLoaderData()
-  // console.log(plant);
+  const axiosSecure = useAxiosSecure()
   const {user} = useAuth()
-  const {photo, title, category, description, price, seller, quantity} = plant
+  const {id} = useParams()
+  const [role, isRoleLoading] = useRole()
+
+  const {
+    data: plant,
+    isLoading,
+    refetch
+  } = useQuery({
+      queryKey: ['plant', id],
+      queryFn: async() => {
+        const  {data} =await axiosSecure(`/plant/${id}`)
+        return data
+      }
+  })
+
+  const {photo, title,category,description, price, seller, quantity} = plant || {}
+  // console.log(plant);
 
   const closeModal = () => {
     setIsOpen(false)
   }
 
+  if(isRoleLoading || isLoading) return <LoadingSpinner></LoadingSpinner>
   return (
     <Container>
       <div className='mx-auto flex flex-col lg:flex-row justify-between w-full gap-12'>
@@ -78,7 +98,7 @@ const PlantDetails = () => {
                 text-neutral-500
               '
             >
-              {quantity}
+              quantity: {quantity}
             </p>
           </div>
           <hr className='my-6' />
@@ -87,7 +107,7 @@ const PlantDetails = () => {
 
             <div>
               <Button 
-              disabled={!user}
+              disabled={!user || user?.email === seller?.email || role !== 'customer'}
               onClick={() => setIsOpen(true)} 
               label={user ? 'parches' : 'login to parches'} />
             </div>
@@ -95,7 +115,12 @@ const PlantDetails = () => {
           <hr className='my-6' />
 
 
-          <PurchaseModal closeModal={closeModal} isOpen={isOpen} plant={plant} />
+          <PurchaseModal 
+          closeModal={closeModal} 
+          isOpen={isOpen} 
+          plant={plant} 
+          refetch={refetch}
+          />
         </div>
       </div>
     </Container>

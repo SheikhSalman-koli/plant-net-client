@@ -2,7 +2,7 @@ import { Link } from 'react-router'
 
 const Card = ({plant}) => {
 
-  const {name, photo, price, category, Quantity, _id} = plant
+  const {name, photo, price, category, quantity, _id} = plant
 
   return (
     <Link
@@ -40,7 +40,7 @@ const Card = ({plant}) => {
         </div>
         <div className='font-semibold text-lg'>name: {name}</div>
         <div className='font-semibold text-lg'>Category: {category}</div>
-        <div className='font-semibold text-lg'>Quantity: {Quantity}</div>
+        <div className='font-semibold text-lg'>Quantity: {quantity}</div>
         <div className='flex flex-row items-center gap-1'>
           <div className='font-semibold'> Price: {price}$</div>
         </div>
