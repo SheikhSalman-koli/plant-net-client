@@ -17,6 +17,7 @@ import MyOrders from '../pages/Dashboard/Customer/MyOrders'
 import axios from 'axios'
 import AdminRoute from './AdminRoute'
 import SellerRoute from './SellerRoute'
+import DashBoard from '../pages/Dashboard/DashBoard'
 
 export const router = createBrowserRouter([
   {
@@ -48,11 +49,15 @@ export const router = createBrowserRouter([
 
     ),
     children: [
+      // {
+      //   index: true,
+      //   Component: DashBoard
+      // },
       {
         index: true,
         element: (
           <PrivateRoute>
-            <Statistics />
+              <Statistics />
             {/* <AdminRoute>
             </AdminRoute> */}
           </PrivateRoute>

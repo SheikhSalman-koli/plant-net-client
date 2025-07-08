@@ -4,6 +4,8 @@ import { useQuery } from '@tanstack/react-query'
 import useAxiosSecure from '../../../hooks/useAxiosSecure'
 import LoadingSpinner from '../../Shared/LoadingSpinner'
 import OrderBarChart from '../../Chart/OrderBarChart'
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 const AdminStatistics = () => {
 
@@ -104,7 +106,7 @@ const AdminStatistics = () => {
           </div>
           {/* Calender */}
           <div className=' relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md overflow-hidden'>
-            {/* Calender */}
+            <Calendar />
           </div>
         </div>
       </div>

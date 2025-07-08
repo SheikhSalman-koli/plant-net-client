@@ -80,13 +80,17 @@ const Sidebar = () => {
               {!isRoleLoading && role === 'customer' && <CustomerMenu />}
               {!isRoleLoading && role === 'seller' && <SellerMenu />}
 
+
+              {!isRoleLoading && role === 'admin' && 
+              <>
               <MenuItem
                 icon={BsGraphUp}
                 label='Statistics'
                 address='/dashboard'
               />
-
-              {!isRoleLoading && role === 'admin' && <AdminMenu />}
+              <AdminMenu />
+              </>
+              }
             </nav>
           </div>
         </div>
